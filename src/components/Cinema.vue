@@ -1,13 +1,16 @@
 <template>
 <div id="overview">
   <div id="main">
-    <movie-list v-bind:genre="genre" v-bind:time="time" v-bind:movies="movies"></movie-list>
+    <movie-list v-bind:genre="genre" v-bind:time="time" v-bind:movies="movies" v-bind:day="day"></movie-list>
     <movie-filter v-on:check-filter="checkFilter"></movie-filter>
   </div>
 </div>
 </template>
 
 <script>
+import moment from 'moment-timezone';
+moment.tz.setDefault('UTC');
+
 import MovieList from './MovieList.vue';
 import MovieFilter from './MovieFilter.vue';
 
@@ -16,7 +19,8 @@ export default {
     return {
       genre: [],
       time: [],
-      movies: []
+      movies: [],
+      day: moment()
     };
   },
   components: {
