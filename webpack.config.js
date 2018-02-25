@@ -3,10 +3,11 @@ require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
 
+// adding babel-polyfill
+// https://labs.chiedo.com/blog/regenerateruntime-error-in-react/
+
 module.exports = {
-  entry: [
-    './src/main.js'
-  ],
+  entry: ['babel-polyfill', './src/main.js'],
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
@@ -16,14 +17,16 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            "presets": [ [ "env" ] ],
-            "plugins": [ "transform-es2015-destructuring", "transform-object-rest-spread", "transform-runtime" ]
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['env'],
+              plugins: ['transform-es2015-destructuring', 'transform-object-rest-spread', 'transform-runtime']
+            }
           }
-        }],
-        exclude: /node_modules/,
+        ],
+        exclude: /node_modules/
       },
       {
         test: /\.scss$/,
@@ -37,9 +40,9 @@ module.exports = {
             // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
             // the "scss" and "sass" values for the lang attribute to the right configs here.
             // other preprocessors should work out of the box, no loader config like this nessessary.
-            'scss': 'vue-style-loader!css-loader!sass-loader',
-            'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
-            'js': 'babel-loader?presets[]=env'
+            scss: 'vue-style-loader!css-loader!sass-loader',
+            sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
+            js: 'babel-loader?presets[]=env'
           }
         }
       }
@@ -47,7 +50,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.common.js'
+      vue$: 'vue/dist/vue.common.js'
     }
   },
   devServer: {
@@ -88,5 +91,5 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })
-  ])
+  ]);
 }

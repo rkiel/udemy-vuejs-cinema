@@ -1,7 +1,7 @@
 <template>
 <div id="overview">
   <div id="main">
-    <movie-list v-bind:genre="genre" v-bind:time="time"></movie-list>
+    <movie-list v-bind:genre="genre" v-bind:time="time" v-bind:movies="movies"></movie-list>
     <movie-filter v-on:check-filter="checkFilter"></movie-filter>
   </div>
 </div>
@@ -15,12 +15,21 @@ export default {
   data() {
     return {
       genre: [],
-      time: []
+      time: [],
+      movies: []
     };
   },
   components: {
     MovieList,
     MovieFilter
+  },
+  async created() {
+    try {
+      const response = await this.$http.get('/api');
+      this.movies = response.data;
+    } catch (e) {
+      this.movies = [];
+    }
   },
   methods: {
     checkFilter(category, title, checked) {
