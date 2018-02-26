@@ -1,21 +1,12 @@
 <template>
-<div id="overview">
-  <div id="main">
-    <movie-list v-bind:genre="genre"
-                v-bind:time="time"
-                v-bind:movies="movies"
-                v-bind:day="day"></movie-list>
-    <movie-filter></movie-filter>
-  </div>
-</div>
+<router-view v-bind:genre="genre"
+             v-bind:time="time"
+             v-bind:movies="movies"
+             v-bind:day="day"></router-view>
 </template>
 
 <script>
 import moment from 'moment-timezone';
-moment.tz.setDefault('UTC');
-
-import MovieList from './MovieList.vue';
-import MovieFilter from './MovieFilter.vue';
 
 import bus from '../util/bus';
 
@@ -27,10 +18,6 @@ export default {
       movies: [],
       day: moment()
     };
-  },
-  components: {
-    MovieList,
-    MovieFilter
   },
   async created() {
     bus.global.$on(bus.events.checkFilter, bus.methods.checkFilter.bind(this));

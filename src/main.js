@@ -1,15 +1,20 @@
+import moment from 'moment-timezone';
+moment.tz.setDefault('UTC');
+
 import Vue from 'vue';
+
 import VueResource from 'vue-resource';
+Vue.use(VueResource); // addes this.$http
 
 import './style.scss';
 
 import Cinema from './components/Cinema.vue';
-
-Vue.use(VueResource); // addes this.$http
+import router from './util/router';
 
 const app = new Vue({
   el: '#app',
   components: {
     Cinema
-  }
+  },
+  router
 });
