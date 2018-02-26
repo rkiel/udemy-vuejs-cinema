@@ -1,8 +1,10 @@
 <template>
-<router-view v-bind:genre="genre"
-             v-bind:time="time"
-             v-bind:movies="movies"
-             v-bind:day="day"></router-view>
+<keep-alive>
+  <router-view v-bind:genre="genre"
+               v-bind:time="time"
+               v-bind:movies="movies"
+               v-bind:day="day"></router-view>
+</keep-alive>
 </template>
 
 <script>

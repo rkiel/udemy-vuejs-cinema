@@ -6,6 +6,9 @@ import Vue from 'vue';
 import VueResource from 'vue-resource';
 Vue.use(VueResource); // addes this.$http
 
+import Tooltip from './util/tooltip';
+Vue.use(Tooltip);
+
 import './style.scss';
 
 import Cinema from './components/Cinema.vue';
