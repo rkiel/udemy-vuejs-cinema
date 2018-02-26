@@ -3,7 +3,8 @@ import Vue from 'vue';
 export default {
   global: new Vue(),
   events: {
-    checkFilter: 'check-filter'
+    checkFilter: 'check-filter',
+    setDay: 'set-day'
   },
   methods: {
     checkFilter(category, title, checked) {
@@ -15,6 +16,9 @@ export default {
           this[category].splice(index, 1);
         }
       }
+    },
+    setDay(day) {
+      this.day = day;
     }
   }
 };

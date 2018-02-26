@@ -21,6 +21,7 @@ export default {
   },
   async created() {
     bus.global.$on(bus.events.checkFilter, bus.methods.checkFilter.bind(this));
+    bus.global.$on(bus.events.setDay, bus.methods.setDay.bind(this));
 
     try {
       const response = await this.$http.get('/api');
